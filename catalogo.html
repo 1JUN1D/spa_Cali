@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Servicios - Spa en Cali</title>
+    <link rel="shortcut icon" href="assets/logo_stephania_dorado.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #4A4A4A;
+            overflow-x: hidden;
+            background: #FFFFFF;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navegación */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(244, 143, 177, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-placeholder {
+            background: linear-gradient(135deg, #F48FB1, #FFD700);
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(244, 143, 177, 0.3);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #4A4A4A;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu a:hover {
+            color: #F48FB1;
+            transform: translateY(-2px);
+        }
+
+        /* Header del catálogo */
+        .catalog-header {
+            background: linear-gradient(135deg, #F48FB1 0%, #FFD700 50%, #F48FB1 100%);
+            padding: 140px 0 80px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .catalog-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="headerPattern" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1" fill="%23FFFFFF" opacity="0.2"/><circle cx="5" cy="25" r="0.5" fill="%23FFD700" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23headerPattern)"/></svg>');
+            pointer-events: none;
+        }
+
+        .catalog-header h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 25px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .catalog-header p {
+            font-size: 1.4rem;
+            color: #FFFFFF;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Secciones de servicios */
+        .services-section {
+            padding: 100px 0;
+            background: #FFFFFF;
+        }
+
+        .category-container {
+            margin-bottom: 80px;
+        }
+
+        .category-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .category-title h2 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #F48FB1, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .category-title p {
+            color: #6A4C93;
+            font-size: 1.2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(244, 143, 177, 0.15);
+            border: 2px solid rgba(244, 143, 177, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(244, 143, 177, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(244, 143, 177, 0.25);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #F48FB1, #FFD700);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            color: #FFFFFF;
+            box-shadow: 0 10px 25px rgba(244, 143, 177, 0.3);
+        }
+
+        .service-info h3 {
+            font-size: 1.4rem;
+            color: #4A4A4A;
+            margin-bottom: 15px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .service-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F48FB1, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #FFFFFF;
+            padding: 15px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            background: linear-gradient(135deg, #128C7E, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Sección alternada para variedad visual */
+        .services-section.alt {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FCE4EC 100%);
+        }
+
+        /* Footer con el mismo diseño */
+        .footer {
+            background: linear-gradient(135deg, #4A4A4A 0%, #6A4C93 100%);
+            color: #FFFFFF;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footerPattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="%23F48FB1" opacity="0.1"/><circle cx="10" cy="40" r="1" fill="%23FFD700" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23footerPattern)"/></svg>');
+            pointer-events: none;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-section h3 {
+            background: linear-gradient(135deg, #F48FB1, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            color: #E8E8E8;
+        }
+
+        .footer-section i {
+            color: #F48FB1;
+            font-size: 1.2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 2px solid rgba(244, 143, 177, 0.2);
+            color: #B8B8B8;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            width: 70px;
+            height: 70px;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.4s ease;
+            animation: pulse 3s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .catalog-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .catalog-header p {
+                font-size: 1.1rem;
+            }
+
+            .category-title h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .service-card {
+                padding: 25px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .catalog-header {
+                padding: 120px 0 60px;
+            }
+
+            .catalog-header h1 {
+                font-size: 2rem;
+            }
+
+            .services-section {
+                padding: 60px 0;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="assets/logo_stephania_dorado.png" alt="Spa en Cali" class="logo-img">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="https://wa.me/573122820376" class="whatsapp-nav"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header del catálogo -->
+    <section class="catalog-header">
+        <div class="container">
+            <h1>Catálogo de Servicios</h1>
+            <p>Descubre todos nuestros tratamientos de belleza y bienestar. Cada servicio está diseñado para realzar tu belleza natural y brindarte la mejor experiencia de relajación.</p>
+        </div>
+    </section>
+
+    <!-- Servicios de Masoterapeuta -->
+    <section class="services-section">
+        <div class="container">
+            <div class="category-container">
+                <div class="category-title">
+                    <h2>Masoterapia</h2>
+                    <p>Tratamientos especializados para relajación y bienestar corporal</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-hands"></i></div>
+                        <div class="service-info">
+                            <h3>Masaje Relajante</h3>
+                            <div class="service-price">$120.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio de Masaje Relajante por $120.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-heart-pulse"></i></div>
+                        <div class="service-info">
+                            <h3>Masaje Terapéutico</h3>
+                            <div class="service-price">$144.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio de Masaje Terapéutico por $144.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
+                        <div class="service-info">
+                            <h3>Descarga Muscular</h3>
+                            <div class="service-price">$144.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio de Descarga Muscular por $144.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-female"></i></div>
+                        <div class="service-info">
+                            <h3>Moldeadores</h3>
+                            <div class="service-price">Desde $456.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio de Moldeadores desde $456.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-weight-hanging"></i></div>
+                        <div class="service-info">
+                            <h3>Reductores</h3>
+                            <div class="service-price">Desde $624.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio de Reductores desde $624.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-user-md"></i></div>
+                        <div class="service-info">
+                            <h3>Post Quirúrgico</h3>
+                            <div class="service-price">Desde $480.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio Post Quirúrgico desde $480.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-magic"></i></div>
+                        <div class="service-info">
+                            <h3>Antifibrosis</h3>
+                            <div class="service-price">Desde $624.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio Antifibrosis desde $624.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-arrow-up"></i></div>
+                        <div class="service-info">
+                            <h3>Levantamiento de Glúteos</h3>
+                            <div class="service-price">$660.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio de Levantamiento de Glúteos por $660.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-wave-square"></i></div>
+                        <div class="service-info">
+                            <h3>Anticelulitis</h3>
+                            <div class="service-price">Desde $624.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio Anticelulitis desde $624.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-fire"></i></div>
+                        <div class="service-info">
+                            <h3>Peptonas</h3>
+                            <div class="service-price">Desde $624.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio de Peptonas desde $624.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-syringe"></i></div>
+                        <div class="service-info">
+                            <h3>Vacuna Antiobesidad</h3>
+                            <div class="service-price">$132.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Vacuna Antiobesidad por $132.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="service-info">
+                            <h3>Suero Energizante</h3>
+                            <div class="service-price">$72.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Suero Energizante por $72.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="service-info">
+                            <h3>Suero Antienvejecimiento</h3>
+                            <div class="service-price">$72.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Suero Antienvejecimiento por $72.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-vitamin"></i></div>
+                        <div class="service-info">
+                            <h3>Súper Dosis de Vitamina C</h3>
+                            <div class="service-price">$72.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Súper Dosis de Vitamina C por $72.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios de Esteticista -->
+    <section class="services-section alt">
+        <div class="container">
+            <div class="category-container">
+                <div class="category-title">
+                    <h2>Estética Facial</h2>
+                    <p>Tratamientos especializados para el cuidado y embellecimiento facial</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-eye"></i></div>
+                        <div class="service-info">
+                            <h3>Lifting de Pestañas</h3>
+                            <div class="service-price">$84.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Lifting de Pestañas por $84.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-gem"></i></div>
+                        <div class="service-info">
+                            <h3>Pestañas Cluster</h3>
+                            <div class="service-price">$54.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa las Pestañas Cluster por $54.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                        <div class="service-info">
+                            <h3>Micropigmentación</h3>
+                            <div class="service-price">$222.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Micropigmentación por $222.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-spa"></i></div>
+                        <div class="service-info">
+                            <h3>Laminado, Epilación y Henna</h3>
+                            <div class="service-price">$84.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el servicio de Laminado, Epilación y Henna por $84.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-sparkles"></i></div>
+                        <div class="service-info">
+                            <h3>Limpieza Facial Profunda</h3>
+                            <div class="service-price">$144.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Limpieza Facial Profunda por $144.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-times-circle"></i></div>
+                        <div class="service-info">
+                            <h3>Bye Bye Acné</h3>
+                            <div class="service-price">$114.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el tratamiento Bye Bye Acné por $114.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-star"></i></div>
+                        <div class="service-info">
+                            <h3>Plasma Facial</h3>
+                            <div class="service-price">$216.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Plasma Facial por $216.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-tint"></i></div>
+                        <div class="service-info">
+                            <h3>Hidratación Facial</h3>
+                            <div class="service-price">$114.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Hidratación Facial por $114.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-fish"></i></div>
+                        <div class="service-info">
+                            <h3>Esperma de Salmón</h3>
+                            <div class="service-price">$840.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el tratamiento de Esperma de Salmón por $840.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-baby"></i></div>
+                        <div class="service-info">
+                            <h3>Baby Glow</h3>
+                            <div class="service-price">$216.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Baby Glow por $216.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-layer-group"></i></div>
+                        <div class="service-info">
+                            <h3>Peeling</h3>
+                            <div class="service-price">Desde $216.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Peeling desde $216.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-cut"></i></div>
+                        <div class="service-info">
+                            <h3>Dermaplaning</h3>
+                            <div class="service-price">$60.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Dermaplaning por $60.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-lips"></i></div>
+                        <div class="service-info">
+                            <h3>Epilación de Bozo</h3>
+                            <div class="service-price">$18.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Epilación de Bozo por $18.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-dna"></i></div>
+                        <div class="service-info">
+                            <h3>Benew Cell</h3>
+                            <div class="service-price">$360.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Benew Cell por $360.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios de Spa de Día -->
+    <section class="services-section">
+        <div class="container">
+            <div class="category-container">
+                <div class="category-title">
+                    <h2>Spa de Día</h2>
+                    <p>Tratamientos premium de medicina estética y rejuvenecimiento</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-syringe"></i></div>
+                        <div class="service-info">
+                            <h3>Botox</h3>
+                            <div class="service-price">$1.020.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el tratamiento de Botox por $1.020.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-child"></i></div>
+                        <div class="service-info">
+                            <h3>Baby Botox</h3>
+                            <div class="service-price">$576.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Baby Botox por $576.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-arrows-alt-v"></i></div>
+                        <div class="service-info">
+                            <h3>Hilos de Tracción</h3>
+                            <div class="service-price">Desde $480.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa los Hilos de Tracción desde $480.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-tint"></i></div>
+                        <div class="service-info">
+                            <h3>Hilos de Hidratación</h3>
+                            <div class="service-price">$240.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa los Hilos de Hidratación por $240.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-fill-drip"></i></div>
+                        <div class="service-info">
+                            <h3>Fillers Sudérmicos</h3>
+                            <div class="service-price">$1.920.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa los Fillers Sudérmicos por $1.920.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-heart"></i></div>
+                        <div class="service-info">
+                            <h3>Pink Glow</h3>
+                            <div class="service-price">$336.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Pink Glow por $336.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-clock"></i></div>
+                        <div class="service-info">
+                            <h3>Antienvejecimiento</h3>
+                            <div class="service-price">Consultar</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el tratamiento Antienvejecimiento" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Consultar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-bone"></i></div>
+                        <div class="service-info">
+                            <h3>Hidroxipatita</h3>
+                            <div class="service-price">$192.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el tratamiento de Hidroxipatita por $192.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-pills"></i></div>
+                        <div class="service-info">
+                            <h3>Suero Multivitamínico</h3>
+                            <div class="service-price">$216.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Suero Multivitamínico por $216.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="service-info">
+                            <h3>Suero Antioxidante</h3>
+                            <div class="service-price">$72.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Suero Antioxidante por $72.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-recycle"></i></div>
+                        <div class="service-info">
+                            <h3>Suero Detox</h3>
+                            <div class="service-price">$96.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Suero Detox por $96.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-user-check"></i></div>
+                        <div class="service-info">
+                            <h3>Suero para Piel, Cabello y Uñas</h3>
+                            <div class="service-price">$216.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Suero para Piel, Cabello y Uñas por $216.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-bed"></i></div>
+                        <div class="service-info">
+                            <h3>Tratamiento para Insomnio</h3>
+                            <div class="service-price">$216.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Tratamiento para Insomnio por $216.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-head-side-virus"></i></div>
+                        <div class="service-info">
+                            <h3>Tratamiento para Migrañas</h3>
+                            <div class="service-price">$216.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Tratamiento para Migrañas por $216.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios de Salón de Belleza -->
+    <section class="services-section alt">
+        <div class="container">
+            <div class="category-container">
+                <div class="category-title">
+                    <h2>Salón de Belleza</h2>
+                    <p>Servicios de belleza y cuidado personal especializados</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-eye-dropper"></i></div>
+                        <div class="service-info">
+                            <h3>Diseño de Cejas en Hilo</h3>
+                            <div class="service-price">$24.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Diseño de Cejas en Hilo por $24.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-fire-flame-curved"></i></div>
+                        <div class="service-info">
+                            <h3>Diseño de Cejas en Cera</h3>
+                            <div class="service-price">$24.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Diseño de Cejas en Cera por $24.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-cut"></i></div>
+                        <div class="service-info">
+                            <h3>Diseño de Cejas en Cuchilla</h3>
+                            <div class="service-price">$12.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa el Diseño de Cejas en Cuchilla por $12.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-palette"></i></div>
+                        <div class="service-info">
+                            <h3>Aplicación de Henna</h3>
+                            <div class="service-price">$18.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Aplicación de Henna por $18.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-walking"></i></div>
+                        <div class="service-info">
+                            <h3>Epilación Media Pierna</h3>
+                            <div class="service-price">$36.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Epilación Media Pierna por $36.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-person-walking"></i></div>
+                        <div class="service-info">
+                            <h3>Epilación Pierna Completa</h3>
+                            <div class="service-price">$66.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Epilación Pierna Completa por $66.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-hand-paper"></i></div>
+                        <div class="service-info">
+                            <h3>Epilación Axilas</h3>
+                            <div class="service-price">$24.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Epilación de Axilas por $24.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-venus"></i></div>
+                        <div class="service-info">
+                            <h3>Epilación Bikini</h3>
+                            <div class="service-price">$60.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la Epilación Bikini por $60.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-circle"></i></div>
+                        <div class="service-info">
+                            <h3>Lóbulos Acero x2</h3>
+                            <div class="service-price">$72.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la perforación de Lóbulos en Acero x2 por $72.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-dot-circle"></i></div>
+                        <div class="service-info">
+                            <h3>Tragus Acero</h3>
+                            <div class="service-price">$48.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la perforación Tragus en Acero por $48.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-bullseye"></i></div>
+                        <div class="service-info">
+                            <h3>Daith Acero</h3>
+                            <div class="service-price">$48.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la perforación Daith en Acero por $48.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-ring"></i></div>
+                        <div class="service-info">
+                            <h3>Helix Acero</h3>
+                            <div class="service-price">$48.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la perforación Helix en Acero por $48.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-adjust"></i></div>
+                        <div class="service-info">
+                            <h3>Conch</h3>
+                            <div class="service-price">$48.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la perforación Conch por $48.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-moon"></i></div>
+                        <div class="service-info">
+                            <h3>Rook</h3>
+                            <div class="service-price">$48.000</div>
+                            <a href="https://wa.me/573122820376?text=Hola! Me interesa la perforación Rook por $48.000" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> Reservar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i>Cl. 24 Nte. #3 A N -30, San Vicente, Cali</p>
+                    <p><i class="fas fa-phone"></i>+57 312 282 0376</p>
+                    <p><i class="fas fa-envelope"></i>info@spaencali.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Horarios</h3>
+                    <p><i class="fas fa-clock"></i>Lunes - Viernes: 9:00 AM - 6:00 PM</p>
+                    <p><i class="fas fa-clock"></i>Sábados: 9:00 AM - 5:00 PM</p>
+                    <p><i class="fas fa-clock"></i>Domingos: Cita previa</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <p>Mantente conectada con nosotros en redes sociales</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/573122820376"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Spa en Cali. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp flotante -->
+    <a href="https://wa.me/573122820376?text=Hola! Me gustaría obtener más información sobre sus servicios" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BeautySalon",
+        "name": "Spa en Cali",
+        "description": "Centro de belleza y bienestar especializado en tratamientos estéticos, masoterapia y medicina estética en Cali, Colombia",
+        "url": "https://spaencali.dondeseria.com/spa-dia-cali.html",
+        "telephone": "+573122820376",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Cl. 24 Nte. #3 A N -30",
+            "addressLocality": "San Vicente",
+            "addressRegion": "Cali",
+            "addressCountry": "Colombia",
+            "postalCode": "760001"
+        },
+        "priceRange": "$12.000 - $1.920.000",
+        "openingHours": [
+            "Mo-Fr 09:00-18:00",
+            "Sa 09:00-17:00",
+            "Su by appointment"
+        ],
+        "sameAs": [
+            "https://wa.me/573122820376"
+        ]
+    }
+    </script>
+
+    <script>
+        // Animaciones suaves al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas las tarjetas de servicios
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efecto de hover mejorado para las tarjetas
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
